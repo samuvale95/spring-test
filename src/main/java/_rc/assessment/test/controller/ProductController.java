@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/products")
 public class ProductController {
 
     private final ProductService productService;
@@ -16,40 +15,45 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping
+    @GetMapping("/")
+    public String home(Model model) {
+        return listProducts(model);
+    }
+
+    @GetMapping("/products")
     public String listProducts(Model model) {
         model.addAttribute("products", productService.getAllProducts());
         return "products/list";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/products/add")
     public String addProductForm(Model model) {
         model.addAttribute("product", new Product());
         return "products/add";
     }
 
-    @PostMapping
-    public String saveProduct(@ModelAttribute Product product) {
+    @PostMapping("/products")
+    public String saveProduct(@ModelAttribute Product product, Model model) {
         productService.saveProduct(product);
-        return "redirect:/products";
+        return listProducts(model);
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/products/edit/{id}")
     public String editProductForm(@PathVariable Long id, Model model) {
         productService.getProductById(id).ifPresent(product -> model.addAttribute("product", product));
         return "products/edit";
     }
 
-    @PostMapping("/{id}")
-    public String updateProduct(@PathVariable Long id, @ModelAttribute Product product) {
+    @PostMapping("/products/{id}")
+    public String updateProduct(@PathVariable Long id, @ModelAttribute Product product, Model model) {
         product.setId(id);
         productService.saveProduct(product);
-        return "redirect:/products";
+        return listProducts(model);
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable Long id) {
+    @GetMapping("/products/delete/{id}")
+    public String deleteProduct(@PathVariable Long id, Model model) {
         productService.deleteProduct(id);
-        return "redirect:/products";
+        return listProducts(model);
     }
 }
