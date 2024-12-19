@@ -1,0 +1,19 @@
+{
+    "name": "Spring Boot Environment",
+    "dockerFile": "Dockerfile",
+    "forwardPorts": [
+        8080
+    ],
+    "extensions": [
+        "vscjava.vscode-java-pack",
+        "pivotal.vscode-spring-boot",
+        "redhat.vscode-xml",
+        "vscjava.vscode-maven"
+    ],
+    "settings": {
+        "java.home": "/usr/lib/jvm/java-17-openjdk",
+        "java.configuration.checkProjectSettingsExclusions": false
+    },
+    "postCreateCommand": "./mvnw clean install",
+    "remoteUser": "vscode"
+}
