@@ -1,9 +1,7 @@
 package _rc.assessment.test.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 public class Product {
@@ -15,6 +13,7 @@ public class Product {
     private String name;
     private String description;
     private double price;
+    private int quantity = 1;
 
     // Getters and Setters
     public Long getId() {
@@ -47,5 +46,13 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

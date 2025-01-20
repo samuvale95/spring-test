@@ -13,6 +13,7 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
+                <th>Quantity</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
                 <td th:text="${product.name}"></td>
                 <td th:text="${product.description}"></td>
                 <td th:text="${product.price}"></td>
+                <td th:text="${product.quantity}"></td>
                 <td>
                     <a th:href="@{'/products/edit/' + ${product.id}}">Edit</a>
                     <a th:href="@{'/products/delete/' + ${product.id}}">Delete</a>
